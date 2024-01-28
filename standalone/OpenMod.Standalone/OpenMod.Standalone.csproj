@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net7.0</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)..\..\props\SharedProjectProps.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\framework\OpenMod.API\OpenMod.API.csproj" />
+    <ProjectReference Include="..\..\framework\OpenMod.Core\OpenMod.Core.csproj" />
+    <ProjectReference Include="..\..\framework\OpenMod.Runtime\OpenMod.Runtime.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,84 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+           "src": "..",
+          "files": [
+            "OpenMod.sln"
+          ]
+        }
+      ],
+      "dest": "api",
+      "disableGitFeatures": false,
+      "disableDefaultFilter": false
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "api/**.yml",
+          "api/index.md"
+        ]
+      },
+      {
+        "files": [
+          "userdoc/**.md",
+          "userdoc/**/toc.yml",
+          "devdoc/**.md",
+          "devdoc/**/toc.yml",
+          "toc.yml",
+          "*.md"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**",
+          "favicon.ico",
+          "logo.png"
+        ]
+      }
+    ],
+    "overwrite": [
+      {
+        "files": [
+          "apidoc/**.md"
+        ],
+        "exclude": [
+          "obj/**",
+          "_site/**"
+        ]
+      }
+    ],
+    "xref": [
+      "no"
+    ],
+    "dest": "_site",
+    "globalMetadataFiles": [],
+    "globalMetadata": {
+      "_appName": "OpenMod Docs",
+      "_appTitle": "OpenMod Docs",
+      "_appFaviconPath": "favicon.ico",
+      "_appLogoPath": "logo.png",
+      "_enableSearch": true,
+      "_disableAffix": true,
+      "_appFooter": "OpenMod .NET Plugin Framework.",
+      "_disableSideFilter": true,
+      "_gitContribute": {
+        "repo": "https://github.com/openmod/openmod"
+      },
+      "_gitUrlPattern": "github"
+    },
+    "fileMetadataFiles": [],
+    "template": ["default", "templates/discordfx"],
+    "postProcessors": [],
+    "markdownEngineName": "markdig",
+    "noLangKeyword": false,
+    "keepFileLink": false,
+    "cleanupCacheHistory": false,
+    "disableGitFeatures": false
+  }
+}

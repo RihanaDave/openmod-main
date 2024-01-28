@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)..\..\props\SharedProjectProps.props" />
+  <Import Project="$(MSBuildThisFileDirectory)..\..\props\UnityEngineDependentProjectProps.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\framework\OpenMod.Bootstrapper\OpenMod.Bootstrapper.csproj" />
+    <ProjectReference Include="..\OpenMod.Unturned.Module.Bootstrapper\OpenMod.Unturned.Module.Bootstrapper.csproj" />
+    <ProjectReference Include="..\OpenMod.Unturned.Module.Shared\OpenMod.Unturned.Module.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" GeneratePathProperty="true" Version="13.0.3" />
+    <PackageReference Include="OpenMod.Unturned.Redist" Version="3.23.12.3">
+      <IncludeAssets>compile</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <Target Name="CopyModuleFiles" AfterTargets="AfterBuild">
+    <ItemGroup>
+      <ModuleFiles Include="$(MSBuildThisFileDirectory)Module\*.*" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(ModuleFiles)" DestinationFolder="$(OutDir)" Condition="@(ModuleFiles-&gt;Count()) != 0" />
+  </Target>
+
+  <Target Name="CopyRuntimeLibraries" AfterTargets="AfterBuild">
+    <ItemGroup>
+      <DependencyFiles Include="$(MSBuildThisFileDirectory)runtimelibs\*.dll" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(DependencyFiles)" DestinationFolder="$(OutDir)" Condition="@(DependencyFiles-&gt;Count()) != 0" />
+  </Target>
+
+  <!--Replaces the .netstandard2.0 version of Newtonsoft.Json to .net45-->
+  <!--Can be removed if Unturned will use by default .netstandard2.1-->
+  <!--https://duanenewman.net/blog/post/a-better-way-to-override-references-with-packagereference/-->
+  <Target Name="CopyNewtonsoftJson" AfterTargets="AfterBuild">
+    <Copy SourceFiles="$(PkgNewtonsoft_Json)\lib\net45\Newtonsoft.Json.dll" DestinationFolder="$(OutDir)" />
+  </Target>
+
+  <ItemGroup>
+    <None Update="Readme.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
